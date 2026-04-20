@@ -43,6 +43,22 @@ nixos-generate-config --show-hardware-config > hosts/$NEWHOSTNAME/hardware-confi
 # 4. Rebuild
 sudo nixos-rebuild switch --flake ~/nixos-config#$NEWHOSTNAME
 ```
+### One-time steps on a brand-new machine (only once, after first rebuild) to reuse the Yubikey dongle
+
+After `sudo nixos-rebuild switch --flake ~/nixos-config#<hostname>` and logging in:
+
+```bash
+# 1. Insert YubiKey
+gpg --card-status          # fetches public key from card (required first time)
+
+# 2. Set trust level for your signing key (one time only)
+gpg --edit-key 8DB60D8EF257AF10
+trust
+4                          # or 5 for ultimate trust
+quit
+```
+That’s it. No other commands, no key copying, no manual `ssh-add`.
+
 ## Switching between machines (same environment)
 All common modules live in `configuration.nix` and `home/` — they are reused automatically.
 Only hardware differs.
