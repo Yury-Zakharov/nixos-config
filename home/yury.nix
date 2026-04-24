@@ -7,6 +7,12 @@
     ./modules/ssh.nix
     ./modules/shell.nix
     ./modules/direnv.nix
+    ./modules/git.nix
+    ./modules/gh.nix
+    ./modules/zed-editor.nix
+    ./modules/firefox.nix
+    ./modules/rider.nix
+    ./modules/antigravity.nix
   ] ++ lib.optional (builtins.pathExists ./modules/ssh-private.nix) ./modules/ssh-private.nix;
 
   home.username = "yury";
@@ -16,11 +22,7 @@
   # Core user packages — single declaration site
   home.packages = with pkgs; [
     nix-prefetch-scripts
-    git
-    gh
     kdePackages.kpat
-    zed-editor
-    jetbrains.rider
 
     (pkgs.writeShellScriptBin "riderw" ''
       set -euo pipefail
@@ -37,7 +39,6 @@
     vlc
     qbittorrent
     vlc-bittorrent
-    antigravity
     zoom-us
     tor-browser
     obsidian
@@ -51,14 +52,4 @@
     GPG_TTY         = "$(tty)";
   };
 
-  programs.firefox = {
-    enable = true;
-    profiles.default.name = "Default";
-    policies = {
-      DisableTelemetry = true;
-      EnableTrackingProtection = true;
-    };
-  };
-
-  programs.zed-editor.enable = true;
 }

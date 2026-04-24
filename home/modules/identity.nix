@@ -8,28 +8,6 @@ let
   };
 in
 {
-  programs.gh = {
-    enable = true;
-    settings.git_protocol = "ssh";
-  };
-
-  programs.git = {
-    enable = true;
-
-    settings.user = {
-      name = identity.name;
-      email = identity.email;
-    };
-
-    settings.push = { autoSetupRemote = true; };
-    settings.init = { defaultBranch = "master"; };
-
-    signing = {
-      signByDefault = true;
-      key = identity.signingKey;
-    };
-  };
-
   home.sessionVariables = {
     GIT_AUTHOR_NAME  = identity.name;
     GIT_AUTHOR_EMAIL = identity.email;
