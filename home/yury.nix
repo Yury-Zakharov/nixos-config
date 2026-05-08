@@ -41,6 +41,7 @@
     zoom-us
     tor-browser
     obsidian
+    teams-for-linux
   ];
 
   # Session variables — single declaration site

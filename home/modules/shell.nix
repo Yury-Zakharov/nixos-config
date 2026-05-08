@@ -9,7 +9,9 @@
     };
 
     bashrcExtra = ''
-      # No implicit ssh-add or rider overrides — everything explicit and logged only
+      ndi() {
+          nix run --refresh --no-eval-cache github:Yury-Zakharov/nix-devshell#init -- "$@"
+      }
 
       # Fast flake + rebuild (recommended, single source of rebuild logic)
       function nuf () {
