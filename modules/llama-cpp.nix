@@ -29,6 +29,8 @@
         "--cpu-moe"            # or "-ot" ".ffn_.*_exps.=CPU" if --cpu-moe not recognised
         "--host" "127.0.0.1"
         "--jinja"              # proper chat template for IT model
+        "--enable-auto-tool-choice"
+        "--tool-call-parser" "gemma4"
         "--sleep-idle-seconds" "600"
 
         # Sampling tuned for code + general (quality first)
