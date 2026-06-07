@@ -16,7 +16,7 @@
       SCARF_NO_ANALYTICS = "True";
 
       # Optional: nicer defaults
-      DEFAULT_MODELS = "qwen3-30b-a3b-q5_k_m";  # change to your preferred filename (without .gguf)
+      DEFAULT_MODELS = "gemma-4-26B-A4B-it-qat-UD-Q4_K_XL";  # change to your preferred filename (without .gguf)
     };
 
     port = 8081;          # different from llama-cpp (8080)

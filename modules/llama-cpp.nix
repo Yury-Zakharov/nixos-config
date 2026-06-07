@@ -12,7 +12,7 @@
     };
 
     # Your model (single source of truth)
-    model = "/var/lib/llama-models/qwen3-30b-a3b-q5_k_m.gguf";
+    model = "/var/lib/llama-models/gemma-4-26B-A4B-it-qat-UD-Q4_K_XL.gguf";
 
     # OpenAI-compatible + built-in web UI
     port = 8080;
@@ -21,23 +21,28 @@
 
     # Fine config (MoE + generous context)
     extraFlags = [
-      "-ngl" "99"          # full GPU offload (16 GiB VRAM)
-      "-c" "131072"        # 128k context
-      "-b" "512"           # batch size (tune if OOM)
-      "--no-mmap"          # safer on iGPU
-      # "--flash-attn"
-      "--cpu-moe"                    # New simple flag: puts all expert weights on CPU
-      # "--n-cpu-moe" "8"         # Alternative: move experts from first N layers to CPU
-      "--host" "127.0.0.1"
-      "--sleep-idle-seconds" "600" # unload after 10 minutes of idle time
-      "--temp" "0.7"          # balanced for your use cases
-      "--min-p" "0.05"        # modern default
-      "--top-k" "0"           # off
-      "--top-p" "1.0"         # off
-      "--repeat-last-n" "-1"          # full context (best for long tasks)
-      "--repeat-penalty" "1.08"       # mild
-      "--presence-penalty" "0.8"      # good balance for Qwen3
-      "--frequency-penalty" "0.0"     # usually off unless very long outputs
+        "-ngl" "99"
+        "-c" "262144"          # start here; 131072 (128k) if 256k is too big
+        "-b" "512"
+        "--ubatch-size" "512"
+        "--no-mmap"
+        "--cpu-moe"            # or "-ot" ".ffn_.*_exps.=CPU" if --cpu-moe not recognised
+        "--host" "127.0.0.1"
+        "--jinja"              # proper chat template for IT model
+        "--sleep-idle-seconds" "600"
+
+        # Sampling tuned for code + general (quality first)
+        "--temp" "0.7"
+        "--top-p" "0.95"
+        "--min-p" "0.05"
+        "--top-k" "40"
+        "--repeat-penalty" "1.08"
+        "--presence-penalty" "0.6"   # light; helps long code sessions without killing creativity
+        "--frequency-penalty" "0.0"
+
+        # KV cache (saves VRAM, minor quality win)
+        "--cache-type-k" "q8_0"
+        "--cache-type-v" "q8_0"
     ];
   };
 
