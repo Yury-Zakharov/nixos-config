@@ -10,33 +10,42 @@
   };
 
   config = lib.mkIf config.services.llama-cpp.enable {
-    services.llama-cpp.settings = {
-      model = "/var/lib/llama-cpp/gemma-4-26B-A4B-it-qat-UD-Q4_K_XL.gguf";
+    services.llama-cpp = {
+      # === THIS WAS MISSING ===
+      package = pkgs.llama-cpp.override {
+        vulkanSupport = true;
+        rocmSupport = false;
+        blasSupport = true;
+      };
 
-      host = "127.0.0.1";
-      port = 8080;
+      settings = {
+        model = "/var/lib/llama-cpp/gemma-4-26B-A4B-it-qat-UD-Q4_K_XL.gguf";
 
-      n-gpu-layers = 99;
-      ctx-size = 262144;
-      batch-size = 512;
-      ubatch-size = 512;
-      no-mmap = true;
-      cpu-moe = true;
+        host = "127.0.0.1";
+        port = 8080;
 
-      jinja = true;
+        n-gpu-layers = 99;
+        ctx-size = 262144;
+        batch-size = 512;
+        ubatch-size = 512;
+        no-mmap = true;
+        cpu-moe = true;
 
-      sleep-idle-seconds = 600;
+        jinja = true;
 
-      temp = 0.7;
-      top-p = 0.95;
-      min-p = 0.05;
-      top-k = 40;
-      repeat-penalty = 1.08;
-      presence-penalty = 0.6;
-      frequency-penalty = 0.0;
+        sleep-idle-seconds = 600;
 
-      cache-type-k = "q8_0";
-      cache-type-v = "q8_0";
+        temp = 0.7;
+        top-p = 0.95;
+        min-p = 0.05;
+        top-k = 40;
+        repeat-penalty = 1.08;
+        presence-penalty = 0.6;
+        frequency-penalty = 0.0;
+
+        cache-type-k = "q8_0";
+        cache-type-v = "q8_0";
+      };
     };
 
     systemd.services.llama-cpp.serviceConfig = {
