@@ -53,7 +53,14 @@
   # Hardware for Vulkan on 780M
   hardware.graphics.enable = true;
   hardware.amdgpu.opencl.enable = true;
+  systemd.services.llama-cpp = {
+      wantedBy = lib.mkForce [ "multi-user.target" ];
 
-  # Optional (upstream already does this)
-  systemd.services.llama-cpp.wantedBy = lib.mkForce [ "multi-user.target" ];
+      serviceConfig = {
+      Environment = [
+          "XDG_CACHE_HOME=/var/cache/llama-cpp"
+      ];
+    };
+  };
+
 }
