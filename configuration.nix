@@ -2,7 +2,7 @@
 
 {
   imports =
-    [ 
+    [
       inputs.nixos-hardware.nixosModules.framework-16-7040-amd
       ./modules/llama-cpp.nix
     ];
@@ -142,6 +142,12 @@
 
     users.yury = import ./home/yury.nix;
   };
+
+  ##############################################
+  # Llama-cpp service
+  ##############################################
+
+  services.llama-cpp.enable = true;
 
   ##############################################
   # Other stuff — explicit only
