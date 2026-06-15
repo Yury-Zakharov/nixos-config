@@ -30,7 +30,7 @@
 
       # Chat template for Gemma-4-IT (no thinking for coding/agents)
       jinja = true;
-      chat-template-kwargs = ''{"enable_thinking": false}'';
+      chat-template-kwargs = "'{\"enable_thinking\": false}'";
 
       # Idle unload after 10 min
       sleep-idle-seconds = 600;
