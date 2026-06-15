@@ -1,16 +1,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  options.services.llama-cpp = {
-    enable = lib.mkEnableOption "llama.cpp HTTP server";
-
-    cacheDirectory = lib.mkOption {
-      type = lib.types.str;
-      default = "/var/cache/llama-cpp";
-      description = "Directory for Vulkan shader cache and other caches.";
-    };
-  };
-
   config = lib.mkIf config.services.llama-cpp.enable {
     services.llama-cpp.settings = {
       model = "/var/lib/llama-cpp/gemma-4-26B-A4B-it-qat-UD-Q4_K_XL.gguf";
@@ -19,7 +9,7 @@
       port = 8080;
 
       n-gpu-layers = 99;
-      ctx-size = 262144;  # 131072;
+      ctx-size = 262144;
       batch-size = 512;
       ubatch-size = 512;
       no-mmap = true;
