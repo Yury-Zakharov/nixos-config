@@ -8,35 +8,34 @@
     package = pkgs.llama-cpp.override {
       vulkanSupport = true;
       rocmSupport = false;
-      blasSupport = true;          # CPU fallback + faster RAM layers
+      blasSupport = true;
     };
 
-    # Your model (single source of truth) — Gemma-4 QAT UD-Q4_K_XL
-    model = "/var/lib/llama-cpp/gemma-4-26B-A4B-it-qat-UD-Q4_K_XL.gguf";
-
-    # OpenAI-compatible + built-in web UI
-    port = 8080;
-    host = "127.0.0.1";
-    openFirewall = false;
-
-    # Fine config for Gemma-4 MoE (converted from your old extraFlags)
+    # All configuration now lives here (no top-level model/host/port)
     settings = {
-      # GPU / MoE / performance
+      # Model (single source of truth) — moved under /var/lib/llama-cpp/
+      model = "/var/lib/llama-cpp/gemma-4-26B-A4B-it-qat-UD-Q4_K_XL.gguf";
+
+      # Server
+      host = "127.0.0.1";
+      port = 8080;
+
+      # MoE + performance (Gemma-4 26B-A4B)
       ngl = 99;
-      ctx-size = 262144;           # 256k — reduce to 131072 if you hit VRAM pressure
+      ctx-size = 262144;           # start with 256k; drop to 131072 if you OOM
       batch-size = 512;
       ubatch-size = 512;
       no-mmap = true;
-      cpu-moe = true;              # MoE experts on CPU/RAM (recommended for your 780M)
+      cpu-moe = true;
 
-      # Chat template (important for Gemma-4-IT)
+      # Chat template for Gemma-4-IT (no thinking for coding/agents)
       jinja = true;
       chat-template-kwargs = ''{"enable_thinking": false}'';
 
-      # Idle unload
+      # Idle unload after 10 min
       sleep-idle-seconds = 600;
 
-      # Sampling (tuned for code + general use)
+      # Sampling (code + general, quality first)
       temp = 0.7;
       top-p = 0.95;
       min-p = 0.05;
@@ -45,16 +44,16 @@
       presence-penalty = 0.6;
       frequency-penalty = 0.0;
 
-      # KV cache (good quality/speed trade-off on 16 GiB iGPU)
+      # KV cache
       cache-type-k = "q8_0";
       cache-type-v = "q8_0";
     };
   };
 
-  # Required for Vulkan on AMD iGPU
+  # Hardware for Vulkan on 780M
   hardware.graphics.enable = true;
   hardware.amdgpu.opencl.enable = true;
 
-  # Optional: ensure it starts on boot (upstream already does this, but harmless)
+  # Optional (upstream already does this)
   systemd.services.llama-cpp.wantedBy = lib.mkForce [ "multi-user.target" ];
 }
