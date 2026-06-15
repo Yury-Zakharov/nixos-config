@@ -21,7 +21,7 @@
       port = 8080;
 
       # MoE + performance (Gemma-4 26B-A4B)
-      ngl = 99;
+      n-gpu-layers = 99;
       ctx-size = 262144;           # start with 256k; drop to 131072 if you OOM
       batch-size = 512;
       ubatch-size = 512;
