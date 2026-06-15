@@ -1,6 +1,14 @@
 { config, pkgs, lib, ... }:
 
 {
+  options.services.llama-cpp = {
+    cacheDirectory = lib.mkOption {
+      type = lib.types.str;
+      default = "/var/cache/llama-cpp";
+      description = "Directory for Vulkan shader cache and other caches.";
+    };
+  };
+
   config = lib.mkIf config.services.llama-cpp.enable {
     services.llama-cpp.settings = {
       model = "/var/lib/llama-cpp/gemma-4-26B-A4B-it-qat-UD-Q4_K_XL.gguf";
