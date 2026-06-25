@@ -42,6 +42,7 @@
     tor-browser
     obsidian
     teams-for-linux
+    remanager
   ];
 
   # Session variables — single declaration site

@@ -12,10 +12,15 @@
 
   outputs = { self, nixpkgs, nixos-hardware, home-manager, ... }@inputs:
   let
+    overlay = final: prev: {
+      remanager = final.callPackage ./pkgs/remanager.nix { };
+    };
+
     mkNixosSystem = hostname: nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs hostname; };
       modules = [
+        { nixpkgs.overlays = [ overlay ]; }
         ./configuration.nix
         ./hosts/${hostname}/hardware-configuration.nix
         home-manager.nixosModules.home-manager
