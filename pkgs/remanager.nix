@@ -20,7 +20,7 @@ let
   };
   icon = fetchurl {
     url = "https://raw.githubusercontent.com/rmitchellscott/reManager/v${version}/assets/icon.svg";
-    hash = "sha256-1v20xl5nm98vwl91bgr54vispxcsdkfgpxpfb9sq8hmdwj4fq05f";
+    sha256 = "1v20xl5nm98vwl91bgr54vispxcsdkfgpxpfb9sq8hmdwj4fq05f";
   };
 in
 stdenv.mkDerivation {
