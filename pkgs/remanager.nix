@@ -26,6 +26,7 @@ in
 stdenv.mkDerivation {
   pname = "remanager";
   inherit version src;
+  dontUnpack = true;
 
   nativeBuildInputs = [ autoPatchelfHook wrapGAppsHook3 ];
   buildInputs = [
