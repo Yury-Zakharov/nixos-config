@@ -16,7 +16,7 @@ let
   version = "1.6.1";
   src = fetchurl {
     url = "https://github.com/rmitchellscott/reManager/releases/download/v${version}/reManager-linux-amd64.tar.gz";
-    hash = "sha256-0spsnnmn7yjrdwfrsv5hgv92wvf0z2wh92n3i7jxzbirn9wy8pnx";
+    sha256 = "0spsnnmn7yjrdwfrsv5hgv92wvf0z2wh92n3i7jxzbirn9wy8pnx";
   };
   icon = fetchurl {
     url = "https://raw.githubusercontent.com/rmitchellscott/reManager/v${version}/assets/icon.svg";
