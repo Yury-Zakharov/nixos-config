@@ -27,7 +27,7 @@ stdenv.mkDerivation {
   pname = "remanager";
   inherit version src;
 
-  nativeBuildInputs = [ autoPatchelfHook wrapGAppsHook ];
+  nativeBuildInputs = [ autoPatchelfHook wrapGAppsHook3 ];
   buildInputs = [
     gtk3
     webkitgtk_4_1
