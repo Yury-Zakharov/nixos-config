@@ -38,10 +38,10 @@
     qbittorrent
     vlc-bittorrent
     antigravity
-    zoom-us
+#    zoom-us
     tor-browser
     obsidian
-    teams-for-linux
+#    teams-for-linux
     remanager
   ];
 
