@@ -18,6 +18,7 @@
     nix-prefetch-scripts
     git
     gh
+    jq
     kdePackages.kpat
     zed-editor
     jetbrains.rider
