@@ -44,6 +44,8 @@
     obsidian
 #    teams-for-linux
     remanager
+    xpdf
+    pdfstudioviewer
   ];
 
   # Session variables — single declaration site
