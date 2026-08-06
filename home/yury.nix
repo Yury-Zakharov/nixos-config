@@ -44,7 +44,6 @@
     obsidian
 #    teams-for-linux
     remanager
-    xpdf
     pdfstudioviewer
   ];
 
