@@ -99,7 +99,12 @@
   console.keyMap = "uk";
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing = {
+    enable = true;
+    drivers = [
+      pkgs.samsung-unified-linux-driver
+    ];
+  };
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
