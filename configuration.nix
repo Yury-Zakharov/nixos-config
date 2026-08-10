@@ -1,5 +1,9 @@
 { config, pkgs, lib, inputs, ... }:
 
+let
+  splix-m2026 = import ./pkgs/splix-m2026.nix { inherit pkgs; };
+in
+
 {
   imports =
     [
@@ -102,7 +106,7 @@
   services.printing = {
     enable = true;
     drivers = [
-      pkgs.splix
+      splix-m2026
     ];
   };
 
