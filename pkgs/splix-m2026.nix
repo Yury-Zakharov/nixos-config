@@ -11,6 +11,8 @@ pkgs.splix.overrideAttrs (old: {
     hash = "sha256-VTfLaD97/WAaRSYcQEbPE9BNmIfANigl10GxgFQdi/8=";
   };
 
+  sourceRoot = "source/splix";
+
   postPatch = pkgs.lib.replaceStrings
     [ "mv -v *.ppd ppd/\n" ]
     [ "" ]
