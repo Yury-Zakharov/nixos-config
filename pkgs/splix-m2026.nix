@@ -8,6 +8,6 @@ pkgs.splix.overrideAttrs (old: {
     owner = "ScumCoder";
     repo = "splix";
     rev = "1128dbda";
-    hash = pkgs.lib.fakeHash;
+    hash = "sha256-VTfLaD97/WAaRSYcQEbPE9BNmIfANigl10GxgFQdi/8=";
   };
 })
