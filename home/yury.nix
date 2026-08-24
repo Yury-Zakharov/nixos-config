@@ -38,7 +38,7 @@
     vlc
     qbittorrent
     vlc-bittorrent
-    antigravity
+    antigravity-ide
 #    zoom-us
     tor-browser
     obsidian
@@ -58,6 +58,7 @@
 
   programs.firefox = {
     enable = true;
+    configPath = ".mozilla/firefox";
     profiles.default.name = "Default";
     policies = {
       DisableTelemetry = true;

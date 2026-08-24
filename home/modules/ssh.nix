@@ -6,13 +6,13 @@
     enable = true;
     enableDefaultConfig = false;
 
-    matchBlocks = {
+    settings = {
       "*" = {
-        addKeysToAgent = "no";
+        AddKeysToAgent = "no";
       };
 
       "github.com" = {
-        user = "git";
+        User = "git";
       };
       # Personal hosts live in ssh-private.nix (gitignored)
     };
