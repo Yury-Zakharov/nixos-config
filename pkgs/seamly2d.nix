@@ -22,7 +22,7 @@ stdenv.mkDerivation (finalAttrs: {
     owner = "FashionFreedom";
     repo = "Seamly2D";
     rev = "v2026.8.17.159";
-    hash = "sha256-sha256-+UWvnsMHO//jxvISXa2jHSlWzQHEl3mvrKZKeiUdk+s="; # filled by update script
+    sha256 = "1swk3ljpljm6mjppk5y4076mca8xlfnms4pjqvizyfq7qfgayigr"; # filled by update script
   };
 
   nativeBuildInputs = with qt6; [
@@ -38,8 +38,8 @@ stdenv.mkDerivation (finalAttrs: {
     qtsvg
     qtmultimedia
   ] ++ [
-    xercesc          # required on Linux for IFC (system package; Windows ships vendored)
-    poppler-utils    # pdftops for PS/EPS export
+    xercesc
+    poppler-utils
     libglvnd
     fontconfig
     freetype
@@ -70,7 +70,6 @@ stdenv.mkDerivation (finalAttrs: {
   installFlags = [ "INSTALL_ROOT=$(out)" ];
 
   postInstall = ''
-    # upstream installs under share/seamly2d; flatten like the old nixpkgs package
     if [ -d $out/share/seamly2d ]; then
       mv $out/share/seamly2d/* $out/share/ || true
       rmdir $out/share/seamly2d || true

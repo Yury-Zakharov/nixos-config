@@ -39,22 +39,16 @@ if [[ "$CURRENT_VERSION" == "$VERSION" ]]; then
   exit 0
 fi
 
-echo "→ Prefetching hash for $TAG ..."
-# --unpack produces the NAR hash that fetchFromGitHub expects
-HASH=$(nix-prefetch-url --unpack "https://github.com/FashionFreedom/Seamly2D/archive/refs/tags/${TAG}.tar.gz")
-if [[ -z "$HASH" ]]; then
-  echo "error: failed to obtain hash" >&2
+echo "→ Prefetching sha256 for $TAG ..."
+SHA256=$(nix-prefetch-url --unpack "https://github.com/FashionFreedom/Seamly2D/archive/refs/tags/${TAG}.tar.gz")
+if [[ -z "$SHA256" ]]; then
+  echo "error: failed to obtain sha256" >&2
   exit 1
-fi
-
-# Convert to SRI form if the tool returned base32
-if [[ "$HASH" != sha256-* ]]; then
-  HASH="sha256-$(nix hash to-sri --type sha256 "$HASH" 2>/dev/null || echo "$HASH")"
 fi
 
 echo "  version = \"$VERSION\""
 echo "  rev     = \"$TAG\""
-echo "  hash    = \"$HASH\""
+echo "  sha256  = \"$SHA256\""
 
 if [[ $DRY_RUN -eq 1 ]]; then
   echo
@@ -65,8 +59,7 @@ fi
 sed -i \
   -e "s/version = \"[^\"]*\";/version = \"${VERSION}\";/" \
   -e "s/rev = \"[^\"]*\";/rev = \"${TAG}\";/" \
-  -e "s|hash = \"[^\"]*\";|hash = \"${HASH}\";|" \
+  -e "s/sha256 = \"[^\"]*\";/sha256 = \"${SHA256}\";/" \
   "$PKG"
 
 echo "Done. Package written to $PKG"
-
