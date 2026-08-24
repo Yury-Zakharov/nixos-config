@@ -14,6 +14,7 @@
   let
     overlay = final: prev: {
       remanager = final.callPackage ./pkgs/remanager.nix { };
+      seamly2d  = final.callPackage ./pkgs/seamly2d.nix { };
     };
 
     mkNixosSystem = hostname: nixpkgs.lib.nixosSystem {

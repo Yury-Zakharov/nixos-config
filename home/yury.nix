@@ -45,6 +45,7 @@
 #    teams-for-linux
     remanager
     pdfstudioviewer
+    seamly2d
   ];
 
   # Session variables — single declaration site
