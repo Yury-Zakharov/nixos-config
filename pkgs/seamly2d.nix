@@ -65,6 +65,8 @@ stdenv.mkDerivation (finalAttrs: {
     "CONFIG+=noDebugSymbols"
     "CONFIG+=noTests"
     "CONFIG+=no_ccache"
+    # https://github.com/NixOS/nixpkgs/issues/214765
+    "QT_TOOL.lrelease.binary=${lib.getDev qt6.qttools}/bin/lrelease"
   ];
 
   installFlags = [ "INSTALL_ROOT=$(out)" ];
