@@ -12,6 +12,9 @@
 , libxi
 , libxcb
 , addDriverRunpath
+, gtk3
+, gsettings-desktop-schemas
+, wrapGAppsHook3
 }:
 
 stdenv.mkDerivation (finalAttrs: {
@@ -31,6 +34,7 @@ stdenv.mkDerivation (finalAttrs: {
     qttools
     addDriverRunpath
     git
+    wrapGAppsHook3
   ];
 
   buildInputs = with qt6; [
@@ -46,6 +50,8 @@ stdenv.mkDerivation (finalAttrs: {
     libxrender
     libxi
     libxcb
+    gtk3
+    gsettings-desktop-schemas
   ];
 
   postPatch = ''
@@ -70,6 +76,16 @@ stdenv.mkDerivation (finalAttrs: {
   ];
 
   installFlags = [ "INSTALL_ROOT=$(out)" ];
+
+dontWrapGApps = true;
+
+preFixup = ''
+  qtWrapperArgs+=(
+    "''${gappsWrapperArgs[@]}"
+    --prefix XDG_DATA_DIRS : "${gsettings-desktop-schemas}/share/gsettings-schemas/${gsettings-desktop-schemas.name}"
+    --prefix XDG_DATA_DIRS : "${gtk3}/share/gsettings-schemas/${gtk3.name}"
+  )
+'';
 
   postInstall = ''
     if [ -d $out/share/seamly2d ]; then
