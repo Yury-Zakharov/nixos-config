@@ -46,6 +46,7 @@
     remanager
     pdfstudioviewer
     seamly2d
+    chromium
   ];
 
   # Session variables — single declaration site
