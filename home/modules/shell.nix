@@ -21,7 +21,7 @@
 
       # Collect garbage
       ncg() {
-        nix-collect-garbage -d
+        nix-collect-garbage -d && sudo nix-collect-garbage -d
       }
 
       # Optimise storage. Slow operation
