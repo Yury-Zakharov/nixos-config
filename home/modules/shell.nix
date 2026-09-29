@@ -9,8 +9,24 @@
     };
 
     bashrcExtra = ''
+      # Initialise a new dev project
       ndi() {
           nix run --refresh --no-eval-cache github:Yury-Zakharov/nix-devshell#init -- "$@"
+      }
+
+      # Reload dev project
+      ndr() {
+        nix flake update devshell && direnv allow
+      }
+
+      # Collect garbage
+      ncg() {
+        nix-collect-garbage -d
+      }
+
+      # Optimise storage. Slow operation
+      nso() {
+        nix-store --optimise
       }
 
       # Fast flake + rebuild (recommended, single source of rebuild logic)
