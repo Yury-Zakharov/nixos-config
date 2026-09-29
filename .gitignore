@@ -1,3 +1,4 @@
 result
 .direnv
 home/modules/ssh-private.nix
+flake.lock
