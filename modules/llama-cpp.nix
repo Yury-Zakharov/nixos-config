@@ -20,6 +20,7 @@
 
       settings = {
         model = "/var/lib/llama-cpp/gemma-4-26B-A4B-it-qat-UD-Q4_K_XL.gguf";
+        alias = "gemma4";
 
         host = "127.0.0.1";
         port = 8080;
