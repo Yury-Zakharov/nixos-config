@@ -47,6 +47,7 @@
     pdfstudioviewer
     seamly2d
     chromium
+    usbutils
   ];
 
   # Session variables — single declaration site
