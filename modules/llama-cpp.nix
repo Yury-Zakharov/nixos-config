@@ -29,7 +29,7 @@
         ctx-size = 262144;
         batch-size = 512;
         ubatch-size = 512;
-        no-mmap = true;
+        load-mode = "none";
         cpu-moe = true;
 
         jinja = true;
