@@ -13,6 +13,21 @@
   home.homeDirectory = "/home/yury";
   home.stateVersion = "25.11";
 
+# input and languages
+ dconf.settings."org/gnome/desktop/input-sources" = {
+     sources = [
+       (lib.hm.gvariant.mkTuple [ "xkb" "gb" ])
+       (lib.hm.gvariant.mkTuple [ "xkb" "ru" ])
+       (lib.hm.gvariant.mkTuple [ "ibus" "mozc-jp" ])
+     ];
+     # Optional: keep or add your preferred xkb-options
+     xkb-options = [
+       "grp:caps_toggle"          # Caps Lock cycles input sources
+       "terminate:ctrl_alt_bksp"  # optional, keep if you want it
+       # "grp_led:caps"           # optional: light Caps LED when not on first source
+     ];
+  };
+
   # Core user packages — single declaration site
   home.packages = with pkgs; [
     nix-prefetch-scripts

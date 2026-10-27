@@ -86,6 +86,57 @@ in
     LC_TIME = "en_GB.UTF-8";
   };
 
+i18n.inputMethod = {
+ enable = true;
+ type = "ibus";
+ ibus.engines = with pkgs.ibus-engines; [
+     mozc-ut   # better dictionaries; use `mozc` if you prefer the vanilla one
+ ];
+# Optional: better for pure Wayland sessions (skips GTK_IM_MODULE / QT_IM_MODULE)
+ibus.waylandFrontend = true;
+ };
+
+# Optional but recommended for proper Japanese/Russian support
+ i18n.supportedLocales = [
+ "en_GB.UTF-8/UTF-8"
+ "ru_RU.UTF-8/UTF-8"
+ "ja_JP.UTF-8/UTF-8"
+ ];
+
+# Fonts
+ fonts = {
+   # Optional but convenient: pulls in a solid base set (DejaVu, Liberation, Noto CJK, emoji, etc.)
+   enableDefaultPackages = true;
+
+   packages = with pkgs; [
+     # High-quality CJK coverage (recommended for Japanese)
+     noto-fonts-cjk-sans
+     noto-fonts-cjk-serif
+
+     # Base Noto (good Latin + broad Unicode)
+     noto-fonts
+
+     # Color emoji
+     noto-fonts-color-emoji
+
+    # Optional extras people often like
+     liberation_ttf
+     fira-code
+     fira-code-symbols
+     mplus-outline-fonts.githubRelease   # popular Japanese-friendly outline fonts
+  ];
+
+  # Optional: influence which fonts are preferred as defaults / fallbacks
+   fontconfig = {
+     defaultFonts = {
+       sansSerif = [ "Noto Sans" "Noto Sans CJK JP" ];
+       serif     = [ "Noto Serif" "Noto Serif CJK JP" ];
+       monospace = [ "Noto Sans Mono" "Noto Sans Mono CJK JP" ];
+       emoji     = [ "Noto Color Emoji" ];
+     };
+   };
+ };
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 

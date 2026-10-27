@@ -19,13 +19,13 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "seamly2d";
-  version = "2026.10.12.200";
+  version = "2026.10.26.146";
 
   src = fetchFromGitHub {
     owner = "FashionFreedom";
     repo = "Seamly2D";
-    rev = "v2026.10.12.200";
-    sha256 = "1808gjmrhjb0vjvjwfzfnxdzm9xn6rkdnjs8jz4qal4k3yq1nk00"; # filled by update script
+    rev = "v2026.10.26.146";
+    sha256 = "0zhaagzfhxdz9dging7f45wmkfn9p8b0arzwazih355zbvcfa56g"; # filled by update script
   };
 
   nativeBuildInputs = with qt6; [
